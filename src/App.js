@@ -23,13 +23,26 @@ const Greetings = () =>
     <li role="presentation"><Link to="/YO">YO</Link></li>
   </ul>
 
+const Home = () => <h1>Home</h1>
+const HomeBody = () => <div>this is the home body</div>
+const Other = () => <h1>Other</h1>
+const OtherBody = () => <div>this is the Other body</div>
+const Container = (props) => <div><OtherLinks/>{props.header}{props.body}</div>
+const OtherLinks = () =>
+  <ul className="nav nav-tabs">
+    <li role="presentation"><Link to="/">Home</Link></li>
+    <li role="presentation"><Link to="/other">Other</Link></li>
+  </ul>
 
 class App extends React.Component {
 
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/(:message)" component={Message}></Route>
+        <Route path="/" component={Container}>
+          <IndexRoute components={ { header: Home, body:HomeBody} }></IndexRoute>
+          <Route path="/other" components={ { header: Other, body:OtherBody} }></Route>
+        </Route>
       </Router>
     )
   }
