@@ -6,21 +6,30 @@ const About = () => <div><h1>About</h1></div>
 const Contact = () => <div><h1>Contact</h1></div>
 
 const Links = () =>
-  <ul class="nav nav-tabs">
+  <ul className="nav nav-tabs">
     <li role="presentation"><Link to="/">Home</Link></li>
     <li role="presentation"><Link to="/about">About</Link></li>
     <li role="presentation"><Link to="/contact">Contact</Link></li>
   </ul>
+
+const Message = (props) => {
+  return <div><h1>{props.params.message || 'Hello'}</h1><Greetings/></div>
+}
+
+const Greetings = () =>
+  <ul className="nav nav-tabs">
+    <li role="presentation"><Link to="/">Hello</Link></li>
+    <li role="presentation"><Link to="/Hi">Hi</Link></li>
+    <li role="presentation"><Link to="/YO">YO</Link></li>
+  </ul>
+
 
 class App extends React.Component {
 
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/" component={Outer}>
-          <IndexRoute component={About}></IndexRoute>
-          <Route path="contact" component={Contact}></Route>
-        </Route>
+        <Route path="/(:message)" component={Message}></Route>
       </Router>
     )
   }
