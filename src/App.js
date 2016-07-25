@@ -7,11 +7,11 @@ const Contact = () => <div><h1>Contact</h1><Links/></div>
 
 const Links = () =>
   <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><Link to="/">Home</Link></li>
-    <li role="presentation"><Link to="/about">About</Link></li>
-    <li role="presentation"><Link to="/contact">Contact</Link></li>
+    <li role="presentation"><Link activeStyle={{color:'green'}} to="/">Home</Link></li>
+    <li role="presentation"><Link activeStyle={{color:'green'}} to="/about">About</Link></li>
+    <li role="presentation"><Link activeClassName="text-success" to="/contact">Contact</Link></li>
   </ul>
-  
+
 class App extends React.Component {
 
   render(){
