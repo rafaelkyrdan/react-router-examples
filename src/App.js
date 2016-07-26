@@ -1,14 +1,15 @@
 import React from 'react';
-import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, Redirect, Link, IndexRoute, hashHistory } from 'react-router';
 
-const Outer = (props) => <div><h1>Our site</h1><Links/>{props.children}</div>
-const About = () => <div><h1>About</h1></div>
-const Contact = () => <div><h1>Contact</h1></div>
+const Outer = () => <div><Links/><h1>Our Home</h1></div>
+const About = () => <div><Links/><h1>About Us</h1></div>
+const Contact = () => <div><Links/><h1>Contact</h1></div>
 
 const Links = () =>
   <ul className="nav nav-tabs">
     <li role="presentation"><Link to="/">Home</Link></li>
     <li role="presentation"><Link to="/about">About</Link></li>
+    <li role="presentation"><Link to="/about-us">About Us</Link></li>
     <li role="presentation"><Link to="/contact">Contact</Link></li>
   </ul>
 
@@ -49,7 +50,10 @@ class App extends React.Component {
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/" component={Page}></Route>
+        <Route path="/" component={Outer}></Route>
+        <Route path="/about-us" component={About}></Route>
+        <Route path="/contact" component={Contact}></Route>
+        <Redirect from="/about" to="/about-us"></Redirect>
       </Router>
     )
   }
