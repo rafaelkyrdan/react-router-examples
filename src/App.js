@@ -44,13 +44,27 @@ const LinskWithQuery = () =>
     <li role="presentation"><Link to={ { pathname:'/', query:{message: 'YO'}} }>YO</Link></li>
   </ul>
 
+class HomeApp extends React.Component {
+  componentWillMount(){
+    this.context.router.setRouteLeaveHook(this.props.route, this.rounteWillLeave);
+  }
+  rounteWillLeave( nextLocation ){
+    console.log(`leaving home for ${nextLocation.pathname}`);
+  }
+  render(){
+    return <div><Links/><h1>Our Home</h1></div>
+  }
+}
+
+HomeApp.contextTypes = { router: React.PropTypes.object.isRequired };
+
 
 class App extends React.Component {
 
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/" component={Outer}></Route>
+        <Route path="/" component={HomeApp}></Route>
         <Route path="/about-us" component={About}></Route>
         <Route path="/contact" component={Contact}></Route>
         <Redirect from="/about" to="/about-us"></Redirect>
