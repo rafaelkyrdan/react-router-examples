@@ -34,15 +34,22 @@ const OtherLinks = () =>
     <li role="presentation"><Link to="/other">Other</Link></li>
   </ul>
 
+const Page = (props) => <div><LinskWithQuery/><h1>{props.location.query.message || 'empty query'}</h1></div>
+
+const LinskWithQuery = () =>
+  <ul className="nav nav-tabs">
+    <li role="presentation"><Link to={ { pathname:'/', query:{message: 'Hello there'}} }>Hello</Link></li>
+    <li role="presentation"><Link to={ { pathname:'/', query:{message: 'HI'}} }>Hi</Link></li>
+    <li role="presentation"><Link to={ { pathname:'/', query:{message: 'YO'}} }>YO</Link></li>
+  </ul>
+
+
 class App extends React.Component {
 
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/" component={Container}>
-          <IndexRoute components={ { header: Home, body:HomeBody} }></IndexRoute>
-          <Route path="/other" components={ { header: Other, body:OtherBody} }></Route>
-        </Route>
+        <Route path="/" component={Page}></Route>
       </Router>
     )
   }
